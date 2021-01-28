@@ -13,10 +13,12 @@ import Loading from "./components/Loading";
 const Home = lazy(() => import("./pages/Home"));
 const History = lazy(() => import("./pages/History"));
 const About = lazy(() => import("./pages/About"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
 
 function App() {
     return (
-        <div className="app">
+        <>
             <Header/>
             <main>
                 <Suspense fallback={<Loading/>}>
@@ -24,11 +26,13 @@ function App() {
                         <Route path="/" exact component={Home}/>
                         <Route path="/about" exact component={About}/>
                         <Route path="/history" exact component={History}/>
+                        <Route path="/register" exact component={Register}/>
+                        <Route path="/login" exact component={Login}/>
                     </Switch>
                 </Suspense>
             </main>
             <Footer/>
-        </div>
+        </>
     );
 }
 
