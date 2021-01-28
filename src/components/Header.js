@@ -30,7 +30,10 @@ function Component() {
                 <StyledLink to="/" activeClassName="active" exact>首页</StyledLink>
                 <StyledLink to="/history" activeClassName="active">上传历史</StyledLink>
                 <StyledLink to="/about" activeClassName="active">关于作者</StyledLink>
+                <button><StyledLink to="/login">登录</StyledLink></button>
+                <button><StyledLink to="/register">注册</StyledLink></button>
             </nav>
+
         </Header>
     );
 }

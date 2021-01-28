@@ -1,11 +1,15 @@
-import {obverseable, action} from "mobx";
+import {observable, action, makeObservable} from "mobx";
 
 
 class AuthStore {
-    @obverseable isLogin = false;
-    @obverseable isLoading = false;
-    @obverseable values = {
-        username: "",
+    constructor() {
+        makeObservable(this);
+    }
+
+    @observable isLogin = false;
+    @observable isLoading = false;
+    @observable values = {
+        username: "haha",
         password: ""
     };
 

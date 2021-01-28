@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useRef} from "react";
+import {observer} from "mobx-react";
+import {useStore} from "../stores";
 
-function Component() {
+const Component = observer(() => {
+    const {AuthStore} = useStore();
+
+
     return (
         <>
-            <div>Home</div>
+            <h1>register:{AuthStore.values.username}</h1>
         </>
     );
-}
+});
+
 
 export default Component;
