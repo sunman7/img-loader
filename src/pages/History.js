@@ -3,7 +3,7 @@ import React from "react";
 function History() {
     return (
         <>
-            <div>sss</div>
+            <div>History</div>
         </>
     );
 }
