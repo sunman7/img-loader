@@ -2,7 +2,7 @@ import {observable, action, makeObservable} from "mobx";
 import Auth from "../models";
 
 
-class AuthStore {
+class UserStore {
     constructor() {
         makeObservable(this);
     }
@@ -13,7 +13,11 @@ class AuthStore {
         this.currentUser = Auth.getCurrentUser();
     }
 
+    @action resetUser() {
+        this.currentUser = null;
+    }
+
 
 }
 
-export {AuthStore};
+export default new UserStore();
