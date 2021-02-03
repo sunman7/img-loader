@@ -2,6 +2,7 @@ import React from "react";
 import {Form, Input, Button} from "antd";
 import styled from "styled-components";
 import {useStore} from "../stores";
+import {useHistory} from "react-router-dom";
 
 
 const Wraper = styled.div`
@@ -35,7 +36,7 @@ const tailLayout = {
 
 const Component = () => {
     const {AuthStore} = useStore();
-
+    const history = useHistory();
 
     const onFinish = values => {
         console.log("Success:", values);
@@ -43,7 +44,7 @@ const Component = () => {
         AuthStore.setPassword(values.password);
         AuthStore.register()
             .then(() => {
-                console.log("注册成功, 跳转到首页");
+                history.push("/");
             }).catch(() => {
             console.log("注册失败，什么都不做");
         });
@@ -129,7 +130,7 @@ const Component = () => {
 
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
-                        提交
+                        注册
                     </Button>
                 </Form.Item>
             </Form>
