@@ -44,6 +44,20 @@ const Uploader = {
                 );
             }
         );
+    },
+    find({page = 0, limit = 10}) {
+        const query = new AV.Query("Image");
+        query.include("owner");
+        query.limit(limit);
+        query.skip(page * limit);
+        query.descending("createdAt");
+        query.equalTo("owner", AV.User.current());
+        return new Promise((resolve, reject) => {
+            query.find()
+                .then(results => {
+                    resolve(results);
+                }).catch(error => reject(error));
+        });
     }
 };
 export {Auth, Uploader};

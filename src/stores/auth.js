@@ -1,6 +1,9 @@
 import {observable, action, makeObservable} from "mobx";
 import {Auth} from "../models";
 import UserStore from "./user";
+import {message} from "antd";
+import HistoryStore from "./history";
+import ImageStore from "./image";
 
 
 class AuthStore {
@@ -25,11 +28,12 @@ class AuthStore {
     @action login() {
         return new Promise((resolve, reject) => {
             Auth.login(this.values.username, this.values.password).then(user => {
-                console.log("登录成功", user);
+                message.success("登录成功~");
                 UserStore.setUser();
                 resolve(user);
             }).catch(err => {
                 UserStore.resetUser();
+                message.error("登录失败~");
                 reject(err);
             });
         });
@@ -42,6 +46,7 @@ class AuthStore {
                 resolve(user);
             }).catch(err => {
                 UserStore.resetUser();
+                message.error("注册失败~");
                 reject(err);
             });
         });
@@ -50,6 +55,9 @@ class AuthStore {
     @action logout() {
         Auth.logout();
         UserStore.resetUser();
+        message.success("注销成功~");
+        HistoryStore.reset();
+        ImageStore.reset();
     }
 }
 

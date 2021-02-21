@@ -5,6 +5,16 @@ import {useStore} from "../stores";
 import {useHistory} from "react-router-dom";
 
 
+const RegisterButton = styled(Button)`
+  width: 100%;
+  background: #fff;
+  border: #6C757D 1px solid;
+  color:#6C757D;
+  &:hover{
+    background: #6C757D;
+    border: none;
+  }
+`;
 const Wraper = styled.div`
   max-width: 600px;
   margin: 30px auto;
@@ -18,21 +28,6 @@ const Title = styled.h1`
   margin-bottom: 30px;
 `;
 
-
-const layout = {
-    labelCol: {
-        span: 6,
-    },
-    wrapperCol: {
-        span: 18,
-    },
-};
-const tailLayout = {
-    wrapperCol: {
-        offset: 6,
-        span: 18,
-    },
-};
 
 const Component = () => {
     const {AuthStore} = useStore();
@@ -72,7 +67,9 @@ const Component = () => {
         <Wraper>
             <Title>注册</Title>
             <Form
-                {...layout}
+
+                layout="vertical"
+                size="large"
                 name="basic"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -128,10 +125,10 @@ const Component = () => {
                     <Input.Password/>
                 </Form.Item>
 
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
+                <Form.Item>
+                    <RegisterButton type="primary" htmlType="submit">
                         注册
-                    </Button>
+                    </RegisterButton>
                 </Form.Item>
             </Form>
         </Wraper>

@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
 import {useStore} from "../stores";
 import {observer} from "mobx-react";
-import {Upload, message} from "antd";
+import {Upload, message, Spin} from "antd";
 import {InboxOutlined} from "@ant-design/icons";
 import styled from "styled-components";
 import {useLocalStore} from "mobx-react-lite";
@@ -61,6 +61,14 @@ const Component = observer(() => {
                     message.warning("请先登录之后再上传图片！");
                     return false;
                 }
+                if (!/(svg$)|(png$)|(jpg$)|(jpeg$)|(gif$)/ig.test(file.type)) {
+                    message.error("只能上传svg/png/jpg/jpeg/gif格式的图片！");
+                    return false;
+                }
+                if (file.size > 1024 * 1024 * 5) {
+                    message.error("只能上传10M以下的图片");
+                    return false;
+                }
                 ImageStore.upload()
                     .then((serverFile) => {
                         console.log("上传成功");
@@ -74,16 +82,17 @@ const Component = observer(() => {
 
         return (
             <div>
-                <Dragger {...props}>
-                    <p className="ant-upload-drag-icon">
-                        <InboxOutlined/>
-                    </p>
-                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                    <p className="ant-upload-hint">
-                        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                        band files
-                    </p>
-                </Dragger>
+                <Spin tip="上传中" spinning={ImageStore.isUploading}>
+                    <Dragger {...props}>
+                        <p className="ant-upload-drag-icon">
+                            <InboxOutlined/>
+                        </p>
+                        <p className="ant-upload-text"><b>将文件拖放到此处或者点击</b></p>
+                        <p className="ant-upload-hint">
+                            仅支持.svg/.png/.jpg/.jpeg/.gif格式的图片，图片最大尺寸为5M
+                        </p>
+                    </Dragger>
+                </Spin>
                 {ImageStore.serverFile ?
                     <Result>
                         <H1>上传结果</H1>

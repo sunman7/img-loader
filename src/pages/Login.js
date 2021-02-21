@@ -18,21 +18,17 @@ const Title = styled.h1`
   margin-bottom: 30px;
 `;
 
+const LoginButton = styled(Button)`
+  width: 100%;
+  background: #fff;
+  border: #6C757D 1px solid;
+  color:#6C757D;
+  &:hover{
+    background: #6C757D;
+    border: none;
+  }
+`;
 
-const layout = {
-    labelCol: {
-        span: 6,
-    },
-    wrapperCol: {
-        span: 18,
-    },
-};
-const tailLayout = {
-    wrapperCol: {
-        offset: 6,
-        span: 18,
-    },
-};
 
 const Component = () => {
     const {AuthStore} = useStore();
@@ -63,12 +59,14 @@ const Component = () => {
 
     return (
         <Wraper>
-            <Title>登录</Title>
+            <Title>登 录</Title>
             <Form
-                {...layout}
+                size="large"
                 name="basic"
                 onFinish={onFinish}
+                layout="vertical"
                 onFinishFailed={onFinishFailed}
+                size="large"
             >
                 <Form.Item
                     label="用户名"
@@ -108,10 +106,10 @@ const Component = () => {
                 </Form.Item>
 
 
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
-                        登录
-                    </Button>
+                <Form.Item>
+                    <LoginButton type="primary" htmlType="submit">
+                        登 录
+                    </LoginButton>
                 </Form.Item>
             </Form>
         </Wraper>
