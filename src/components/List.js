@@ -21,7 +21,6 @@ const Component = observer(() => {
         HistoryStore.find();
     };
     useEffect(() => {
-        console.log("进入组件");
         return () => {
             HistoryStore.reset();
         };
