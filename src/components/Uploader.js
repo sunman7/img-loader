@@ -45,11 +45,9 @@ const Component = observer(() => {
 
         }));
         const bindWidthChange = () => {
-            console.log("width");
             store.setWidth(widthRef.current.value);
         };
         const bindHeightChange = () => {
-            console.log("height");
             store.setHeight(heightRef.current.value);
         };
         const props = {
