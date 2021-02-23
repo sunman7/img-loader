@@ -55,7 +55,7 @@ const Component = observer(() => {
                         </div>
                         <div><P>{item.attributes.filename}</P></div>
                         <div>
-                            <a style={{fontSize: "20px"}} href={item.attributes.url.attributes.url}>预览图片</a>
+                            <a style={{fontSize: "20px"}} href={item.attributes.url.attributes.url} target="_blank">预览图片</a>
                             <A onClick={() => remove(item.attributes.filename)}>删除</A>
                         </div>
                     </List.Item>
