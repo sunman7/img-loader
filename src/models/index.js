@@ -58,6 +58,19 @@ const Uploader = {
                     resolve(results);
                 }).catch(error => reject(error));
         });
+    },
+    remove(fileName) {
+        const query = new AV.Query("Image");
+        query.equalTo("owner", AV.User.current());
+        query.equalTo("filename", fileName);
+        return new Promise((resolve, reject) => {
+            query.find()
+                .then(results => {
+                    const result = AV.Object.createWithoutData("Image", results[0].id);
+                    resolve(result);
+                    result.destroy();
+                }).catch(err => reject(err));
+        });
     }
 };
 export {Auth, Uploader};

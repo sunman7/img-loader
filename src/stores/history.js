@@ -34,6 +34,19 @@ class HistoryStore {
         });
     }
 
+    @action remove(fileName) {
+        return new Promise((resolve, reject) => {
+            Uploader.remove(fileName).then(serverFile => {
+                resolve(serverFile);
+
+                message.success("删除成功");
+            }).catch(err => {
+                reject(err);
+                message.error("删除失败");
+            });
+        });
+    }
+
     @action reset() {
         this.list = [];
         this.isLoading = false;

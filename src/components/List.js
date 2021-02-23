@@ -15,17 +15,30 @@ const P = styled.p`
   font-size: 20px;
   font-weight: bold;
 `;
+const A = styled.button`
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  &:hover{
+    color:red;
+  }
+`;
 const Component = observer(() => {
     const {HistoryStore} = useStore();
     const loadMore = () => {
         HistoryStore.find();
     };
     useEffect(() => {
-        console.log("进入组件");
         return () => {
             HistoryStore.reset();
         };
     }, []);
+    const remove = (fileName) => {
+        HistoryStore.remove(fileName);
+        window.location.reload();
+    };
     return (
         <InfiniteScroll
             initialLoad={true}
@@ -43,7 +56,8 @@ const Component = observer(() => {
                         </div>
                         <div><P>{item.attributes.filename}</P></div>
                         <div>
-                            <a href={item.attributes.url.attributes.url}>预览图片</a>
+                            <a style={{fontSize: "20px"}} href={item.attributes.url.attributes.url}>预览图片</a>
+                            <A onClick={() => remove(item.attributes.filename)}>删除</A>
                         </div>
                     </List.Item>
                 )}
