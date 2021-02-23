@@ -30,6 +30,7 @@ class HistoryStore {
             }).catch(error => {
             message.error("加载数据失败~");
         }).finally(() => {
+            this.list.forEach(item => console.log(item));
             this.isLoading = false;
         });
     }
@@ -38,13 +39,16 @@ class HistoryStore {
         return new Promise((resolve, reject) => {
             Uploader.remove(fileName).then(serverFile => {
                 resolve(serverFile);
-
+                this.list = this.list.filter(item => item.id !== serverFile.id)
                 message.success("删除成功");
             }).catch(err => {
                 reject(err);
                 message.error("删除失败");
             });
         });
+    }
+
+    @action delIndex(index) {
     }
 
     @action reset() {

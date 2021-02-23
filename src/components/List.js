@@ -37,7 +37,6 @@ const Component = observer(() => {
     }, []);
     const remove = (fileName) => {
         HistoryStore.remove(fileName);
-        window.location.reload();
     };
     return (
         <InfiniteScroll
